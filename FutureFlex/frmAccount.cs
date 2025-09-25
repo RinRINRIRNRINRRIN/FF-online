@@ -1,0 +1,141 @@
+﻿using Bunifu.UI.WinForms;
+using FutureFlex.Models;
+using FutureFlex.SQL;
+using Guna.UI2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+
+namespace FutureFlex
+{
+    public partial class frmAccount : Form
+    {
+        public frmAccount(List<PermissionModel> permissionModels)
+        {
+            InitializeComponent();
+            _permissionModels = permissionModels;
+        }
+        List<PermissionModel> _permissionModels;
+
+        BunifuSnackbar sk = new BunifuSnackbar();
+
+        void CheckPermission()
+        {
+            // Define permission
+
+            if (EmployeeModel.emp_username == "sa")
+            {
+                btnAddEmployee.Enabled = true;
+            }
+            else
+                foreach (PermissionModel item in _permissionModels)
+                {
+                    if (item.Menu == "Account")
+                    {
+                        if (item.Add)
+                            btnAddEmployee.Enabled = true;
+                    }
+                }
+
+        }
+        private void frmPrivilage_Load(object sender, EventArgs e)
+        {
+            CheckPermission();
+
+            txtFullName.Text = EmployeeModel.emp_name;
+            txtUsername.Text = EmployeeModel.emp_username;
+            txtPassword.Text = EmployeeModel.emp_password;
+        }
+
+
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void BTN_CLICK(object sender, EventArgs e)
+        {
+            Guna2Button btn = sender as Guna2Button;
+
+            switch (btn.Tag)
+            {
+                case "employee":
+                    frmPrivilage frmPrivilage = new frmPrivilage(_permissionModels);
+                    frmPrivilage.ShowDialog();
+                    break;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (EmployeeModel.emp_username == "sa")
+            {
+                MessageBox.Show("ไม่สามารถแก้ไขสิทธิ์ข้อมูลผู้ใช้ได้", "Warnning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            panel1.Enabled = true;
+            panel2.Visible = true;
+            btnAddEmployee.Enabled = false;
+        }
+
+        private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbShowPassword.Checked)
+            {
+                txtPassword.UseSystemPasswordChar = false;
+                txtPassword.PasswordChar = '\0';
+
+                txtCMPassword.UseSystemPasswordChar = false;
+                txtCMPassword.PasswordChar = '\0';
+            }
+            else
+            {
+                txtPassword.UseSystemPasswordChar = true;
+                txtPassword.PasswordChar = '*';
+
+                txtCMPassword.UseSystemPasswordChar = true;
+                txtCMPassword.PasswordChar = '*';
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            // ตรวจสอบค่าว่าง
+            foreach (var txt in panel1.Controls.OfType<Guna2TextBox>())
+            {
+                if (txt.Text == "")
+                {
+                    sk.Show(this, "กรุณากรอกข้อมูลให้ตรบก่อนการบันทึก", BunifuSnackbar.MessageTypes.Warning, 3000, "OK", BunifuSnackbar.Positions.TopCenter);
+                    return;
+                }
+            }
+
+            // เช็คว่ารหัสตรงหรือไม่
+            if (txtPassword.Text != txtCMPassword.Text)
+            {
+                sk.Show(this, "รหัสผ่านไม่ตรง", BunifuSnackbar.MessageTypes.Warning, 3000, "OK", BunifuSnackbar.Positions.TopCenter);
+                return;
+            }
+
+            //บันทึก
+            if (tbEmployeeSQL.UPDATE(txtFullName.Text, txtUsername.Text, txtCMPassword.Text, EmployeeModel.emp_username))
+            {
+                msg.Caption = "Success";
+                msg.Icon = MessageDialogIcon.Information;
+                msg.Text = "Complate edit account please open a program again";
+                msg.Buttons = MessageDialogButtons.OK;
+
+                Application.Exit();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            panel1.Enabled = false;
+            panel2.Visible = false;
+            CheckPermission();
+        }
+    }
+}

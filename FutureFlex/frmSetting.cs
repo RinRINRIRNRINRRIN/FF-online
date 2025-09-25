@@ -1,0 +1,140 @@
+﻿using Bunifu.UI.WinForms;
+using FutureFlex.Models;
+using Guna.UI2.WinForms;
+using System;
+using System.Configuration;
+using System.IO.Ports;
+using System.Linq;
+using System.Windows.Forms;
+
+namespace FutureFlex
+{
+    public partial class frmSetting : Form
+    {
+        SerialPort sa = new SerialPort();
+
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        BunifuSnackbar sk = new BunifuSnackbar();
+        public frmSetting()
+        {
+            InitializeComponent();
+        }
+
+
+
+        private void frmSetting_Load(object sender, EventArgs e)
+        {
+
+            ConfigurationModel model = new ConfigurationModel();
+            // ดึงค่า COM BUADRATE มาแสดงที่ Combobox
+            cbbWGHB.Items.Add(model.GetComportName());
+            cbbWGHC.Items.Add(model.GetBaudrate().ToString());
+
+            cbbWGHC.SelectedIndex = 0;
+            cbbWGHB.SelectedIndex = 0;
+
+            txtIp.Text = model.GetIpServer();
+            txtDocNumPO.Text = model.GetDocumentPO();
+            txtDocNumJIT.Text = model.GetDocumentJIT();
+            txtDocNumOdoo.Text = model.GetDocumentOdoo();
+            txtDocNumHistory.Text = model.GetDocumentHistory();
+
+
+        }
+
+
+        private void GET_SERIALPORT(object sender, EventArgs e)
+        {
+            Guna2ComboBox cbb = sender as Guna2ComboBox;
+
+            string[] a = SerialPort.GetPortNames();
+
+            cbb.Items.Clear();
+            for (int i = 0; i < a.Length; i++)
+            {
+                cbb.Items.Add(a[i]);
+            }
+        }
+
+        private void GET_BUADRATE(object sender, EventArgs e)
+        {
+            Guna2ComboBox cbb = sender as Guna2ComboBox;
+
+            cbb.Items.Clear();
+            cbb.Items.Add(9600);
+            cbb.Items.Add(115200);
+        }
+
+        private void CLEAR_COMBOBOX(object sender, EventArgs e)
+        {
+            Guna2ComboBox cbb = sender as Guna2ComboBox;
+
+            if (cbb.Text == "")
+            {
+                cbb.Items.Clear();
+                switch (cbb.Tag)
+                {
+                    case "COM":
+                        cbb.Items.Add("--COM--");
+                        cbb.SelectedIndex = 0;
+                        break;
+                    case "BUADRATE":
+                        cbb.Items.Add("--BUADRATE--");
+                        cbb.SelectedIndex = 0;
+                        break;
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            foreach (var item in gbScale.Controls.OfType<ComboBox>())
+            {
+                if (item.Text.Contains("--"))
+                {
+                    msg.Buttons = MessageDialogButtons.OK;
+                    msg.Icon = MessageDialogIcon.Warning;
+                    msg.Show("Please select COM and BUADRATE before to save", "COM and BAUDRATE");
+                    return;
+                }
+            }
+
+            if (txtIp.Text == "")
+            {
+                msg.Buttons = MessageDialogButtons.OK;
+                msg.Icon = MessageDialogIcon.Warning;
+                msg.Show("Please fill ip server before to save", "IP Server");
+                return;
+            }
+
+            foreach (var item in gbDocnumber.Controls.OfType<Guna2TextBox>())
+            {
+                if (item.Text == "")
+                {
+                    msg.Buttons = MessageDialogButtons.OK;
+                    msg.Icon = MessageDialogIcon.Warning;
+                    msg.Show("Please fill document number before to save", "Document number");
+                    return;
+                }
+            }
+
+            // Scale
+            config.AppSettings.Settings["WGH_COM"].Value = cbbWGHC.Text;
+            config.AppSettings.Settings["WGH_BAUDRATE"].Value = cbbWGHB.Text;
+            // Tcp/IP
+            config.AppSettings.Settings["IP_SERVER"].Value = txtIp.Text;
+            // Document number
+            config.AppSettings.Settings["DocNumPO"].Value = txtDocNumPO.Text;
+            config.AppSettings.Settings["DocNumJIT"].Value = txtDocNumJIT.Text;
+            config.AppSettings.Settings["DocNumOdoo"].Value = txtDocNumOdoo.Text;
+            config.AppSettings.Settings["DocNumHistory"].Value = txtDocNumHistory.Text;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+
+            msg.Buttons = MessageDialogButtons.OK;
+            msg.Icon = MessageDialogIcon.Information;
+            msg.Show("Save setting success program will close please open again", "Save setting");
+            Application.Exit();
+        }
+    }
+}
