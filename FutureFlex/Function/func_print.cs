@@ -321,7 +321,7 @@ namespace FutureFlex.Function
                             e.Graphics.DrawString($"ใบ", fontHead, Brushes.Black, new System.Drawing.Point(190, y));
                             e.Graphics.DrawString($"{double.Parse(_net).ToString("#,###.00")}", fontDetail, Brushes.Black, new System.Drawing.Point(210, y));
                             e.Graphics.DrawString($"kg.", fontHead, Brushes.Black, new System.Drawing.Point(250, y));
-                            e.Graphics.DrawString($"______    ________    ______", fontHead, Brushes.Black, new System.Drawing.Point(75, y));
+                            e.Graphics.DrawString($"______     ________     _____", fontHead, Brushes.Black, new System.Drawing.Point(75, y));
                             y += fixY;
                             e.Graphics.DrawString($"[วันเดือนปีที่ผลิต] : ___________________________________________________", fontHead, Brushes.Black, new System.Drawing.Point(5, y));
                             e.Graphics.DrawString($"{DateTime.Now.ToString("dd/MM/yyyy")}", fontDetail, Brushes.Black, new System.Drawing.Point(130, y));
