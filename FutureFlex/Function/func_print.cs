@@ -219,7 +219,7 @@ namespace FutureFlex.Function
                     switch (Side)
                     {
                         case "none":
-                            _side = "ไม่เลือกด้าน";
+                            _side = "-";
                             break;
                         case "behind":
                             _side = "ด้านหลัง";
