@@ -25,8 +25,8 @@ namespace FutureFlex
 .WriteTo.Console(Serilog.Events.LogEventLevel.Debug)
 .CreateLogger();
 
-            VersionModel model = new VersionModel();
-            label5.Text = $"Version {model.GetFullVersion()}";
+            //VersionModel model = new VersionModel();
+            //label5.Text = $"Version {model.GetFullVersion()}";
         }
 
         private int countToBypassUpdate = 0;
@@ -134,27 +134,7 @@ namespace FutureFlex
                     Log.Warning("เชื่อมต่อฐานข้อมูลสำเร็จ");
                     await Task.Delay(900);
                     label1.Text = "Connect success";
-                    await Task.Delay(1000);
-                    label1.Text = "Check version software";
-
-                    // เช็คว่าถ้ามีการกด bypass เกิน 3 ครั้งระบบจะไม่เข้าสู่ autoupdate (F8)
-                    if (countToBypassUpdate <= 3)
-                    {
-                        if (!CheckVersion())
-                        {
-                            // ต้องเป็นที่อยู่ตรงนี้เท่านั้น
-                            Process.Start("D:\\FutureFlex\\AutoUpdate\\AutoUpdate.exe");
-                            Application.Exit();
-                        }
-                        else
-                        {
-                            gbConnection.Visible = false;
-                            txtUsername.Focus();
-                            tbOdoo.defineServerOdoo();
-                        }
-                    }
-
-
+                   
                     gbConnection.Visible = false;
                     txtUsername.Focus();
                     tbOdoo.defineServerOdoo();

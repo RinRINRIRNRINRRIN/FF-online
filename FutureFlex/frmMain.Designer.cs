@@ -483,7 +483,7 @@ namespace FutureFlex
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Future Flex Ver 0.0.1";
+            this.Text = "Future Flex Ver 1.3.10";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);

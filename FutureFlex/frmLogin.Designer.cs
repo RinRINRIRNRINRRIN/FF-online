@@ -111,7 +111,7 @@ namespace FutureFlex
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(236, 21);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Version  1.3.1";
+            this.label5.Text = "Version  1.3.10";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2BorderlessForm1
