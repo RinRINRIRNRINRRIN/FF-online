@@ -48,6 +48,11 @@ namespace FutureFlex.SQL
 
 
         #region SELECT
+        /// <summary>
+        /// ดึงข้อมูลสิทธิ์การใช้งานของ user ที่ login
+        /// </summary>
+        /// <param name="_employee"></param>
+        /// <returns></returns>
         public static DataTable SELECT_PRIVILAGE(string _employee)
         {
             try
@@ -67,7 +72,6 @@ namespace FutureFlex.SQL
             }
             return tb;
         }
-
 
         /// <summary>
         /// สำหรับเช็ค สิทธืทุกเมนูเมื่อ login
@@ -156,8 +160,6 @@ namespace FutureFlex.SQL
             return true;
         }
 
-
-
         /// <summary>
         /// สำหรับเช็ค สิทธิ์เฉพาะเมนู สำหรับหน้ากำหนดสิทธื
         /// </summary>
@@ -185,6 +187,15 @@ namespace FutureFlex.SQL
         #endregion
 
         #region INSERT
+        /// <summary>
+        /// สร้างสิทธิ์การใช้งานของ user
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <param name="menuName"></param>
+        /// <param name="pri_add"></param>
+        /// <param name="pri_del"></param>
+        /// <param name="pri_edit"></param>
+        /// <returns></returns>
         public static bool INSERT(string employeeID, string menuName, string pri_add, string pri_del, string pri_edit)
         {
             try
@@ -212,11 +223,12 @@ namespace FutureFlex.SQL
         }
         #endregion
 
-        #region UPDATE
-
-        #endregion
-
         #region DELETE
+        /// <summary>
+        /// ลบสิทธิ์การใช้งานของ user
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
         public static bool DELETE(string employeeID)
         {
             try

@@ -142,6 +142,10 @@ namespace FutureFlex
 
         }
 
+        /// <summary>
+        /// กำหนดข้อมูลที่จะพิมพ์กรณีเป็นแบบกล่อง
+        /// </summary>
+        /// <param name="tb"></param>
         void DefineReportBox(DataTable tb)
         {
             DataSet1 dataSet1 = new DataSet1();
@@ -157,6 +161,11 @@ namespace FutureFlex
             RefreshReport(dataSet1, rpvBox);
         }
 
+
+        /// <summary>
+        /// กำหนดข้อมูลที่จะพิมพ์กรณีเป็นแบบม้วน
+        /// </summary>
+        /// <param name="tb"></param>
         void DefineReportRoll(DataTable tb)
         {
             DataSet1 dataSet1 = new DataSet1();

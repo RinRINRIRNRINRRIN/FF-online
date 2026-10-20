@@ -78,6 +78,9 @@ namespace FutureFlex.API
 
         public static List<string> gvAndPo = new List<string>();
 
+        /// <summary>
+        /// สำหรับ Clear ของแต่ละ Method
+        /// </summary>
         public static void ClearProp()
         {
             Log.Information("== เครีย์ property MRP");

@@ -118,7 +118,11 @@ namespace FutureFlex.API
             }
         }
 
-
+        /// <summary>
+        /// หาตามเลขที่ PO
+        /// </summary>
+        /// <param name="po_num"></param>
+        /// <returns></returns>
         public static async Task<bool> Split_list(string po_num)
         {
             try
@@ -176,7 +180,11 @@ namespace FutureFlex.API
             return true;
         }
 
-
+        /// <summary>
+        /// หาตามเลขที่เอกสารแบ่งม้วน
+        /// </summary>
+        /// <param name="split_num"></param>
+        /// <returns></returns>
         public static async Task<bool> Split_num(string split_num)
         {
             Log.Information($"=================================================================  ดึงข้อมูล SPLIT จาก po {split_num}");
@@ -244,7 +252,31 @@ namespace FutureFlex.API
             return true;
         }
 
-
+        /// <summary>
+        /// รายการน้ำหนักชั่งใหม่หลังการแบ่งม้วนส่ง Odoo
+        /// </summary>
+        /// <param name="spl_name"></param>
+        /// <param name="spl_id"></param>
+        /// <param name="wgh_id"></param>
+        /// <param name="machineOperator"></param>
+        /// <param name="country"></param>
+        /// <param name="type"></param>
+        /// <param name="side"></param>
+        /// <param name="po"></param>
+        /// <param name="date"></param>
+        /// <param name="net"></param>
+        /// <param name="tare"></param>
+        /// <param name="gross"></param>
+        /// <param name="weightPaper"></param>
+        /// <param name="weightCore"></param>
+        /// <param name="joint"></param>
+        /// <param name="qty_pch"></param>
+        /// <param name="meterRoll"></param>
+        /// <param name="lot"></param>
+        /// <param name="seq"></param>
+        /// <param name="count_total"></param>
+        /// <param name="qty_roll"></param>
+        /// <returns></returns>
         public static async Task<bool> CREATE(string spl_name, string spl_id, string wgh_id, string machineOperator, string country, string type, string side, string po, string date, string net, string tare, string gross, string weightPaper, string weightCore, string joint, string qty_pch, string meterRoll, string lot, string seq, string count_total, double qty_roll)
         {
             try

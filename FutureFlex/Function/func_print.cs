@@ -80,7 +80,7 @@ namespace FutureFlex.Function
         public static string Side { get; set; }
 
         /// <summary>
-        /// สำหรับการพิมพ์
+        /// สำหรับกำหนดค่าข้อมูลที่ต้องการพิมพ์
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
@@ -363,7 +363,12 @@ namespace FutureFlex.Function
             return true;
         }
 
-
+        /// <summary>
+        /// ตั้งค่าการดาษตามการพิมพ์แบบต่าง  ๆ 
+        /// </summary>
+        /// <param name="printDocument"></param>
+        /// <param name="mode">JIT or PO</param>
+        /// <returns></returns>
         public static bool SetPrinter(PrintDocument printDocument, string mode)
         {
             try
@@ -422,31 +427,6 @@ namespace FutureFlex.Function
             }
 
             return true;
-        }
-
-
-
-
-        static bool CheckPrinterStatus(string printerName)
-        {
-            bool isConnected = false;
-
-            try
-            {
-                PrintServer printServer = new PrintServer();
-                PrintQueue printQueue = printServer.GetPrintQueue(printerName);
-
-                if (printQueue != null)
-                {
-                    isConnected = true;
-                }
-            }
-            catch (PrintQueueException ex)
-            {
-                isConnected = false;
-            }
-
-            return isConnected;
         }
     }
 }

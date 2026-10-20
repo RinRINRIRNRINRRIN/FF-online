@@ -36,6 +36,12 @@ namespace FutureFlex.API
         public static DataTable Mrp_list_return { get; set; } = new DataTable();
 
 
+        public static string Mo_pono { get; set; }
+        public static int Mo_so_id { get; set; }
+        public static string Mo_so_no { get; set; }
+        public static int Partner_id { get; set; }
+        public static string Partner_name { get; set; }
+
 
         /// <summary>
         /// สำหรับการสร้าง datatable ใหม่เพื่อเก็บข้อมูล
@@ -66,15 +72,11 @@ namespace FutureFlex.API
                 throw;
             }
         }
-        public static string Mo_pono { get; set; }
-        public static int Mo_so_id { get; set; }
-        public static string Mo_so_no { get; set; }
-        public static int Partner_id { get; set; }
-        public static string Partner_name { get; set; }
+
 
 
         /// <summary>
-        /// สำหรับดึงข้อมูลไปชั่งเพื่อขาย
+        /// สำหรับรับคืนจาการซื้อ
         /// </summary>
         public static class PO
         {
@@ -138,13 +140,11 @@ namespace FutureFlex.API
                 }
                 return true;
             }
-
-
         }
 
 
         /// <summary>
-        /// สำหรับดึงข้อมูลไปชั่งเพื่อเก็บ
+        /// สำหรับรับซื้อจาก RTFG ที่เป็น JIT
         /// </summary>
         public static class JIT
         {
@@ -227,13 +227,6 @@ namespace FutureFlex.API
                 return true;
             }
         }
-
-
-
-
-
-
-
 
 
         /// <summary>

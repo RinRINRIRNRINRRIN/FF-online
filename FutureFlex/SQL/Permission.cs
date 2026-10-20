@@ -22,6 +22,12 @@ namespace FutureFlex.SQL
         DataTable tb = new DataTable();
         SqlCommand cmd = new SqlCommand();
         string sql = "";
+
+        /// <summary>
+        /// ดึงข้อมูลสิทธิ์การใช้งานของพนักงานจากฐานข้อมูล tbPrivilage โดยใช้ employeeId เป็นตัวกรอง
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         public List<PermissionModel> GetPermissionByEmployeeId(string employeeId)
         {
             List<PermissionModel> list = new List<PermissionModel>();

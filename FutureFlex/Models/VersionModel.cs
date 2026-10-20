@@ -55,8 +55,5 @@ namespace FutureFlex.Models
             return dateBuile;
         }
 
-
-
-
     }
 }

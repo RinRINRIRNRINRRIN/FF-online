@@ -20,6 +20,11 @@ namespace FutureFlex.Function
         public static bool ConnectState { get; set; } = false;
         public static bool ErrState { get; set; } = false;
         public static string IpServer { get; set; } = ConfigurationManager.AppSettings["IP_SERVER"];
+
+        /// <summary>
+        /// connect to server and create a task to receive data from server
+        /// </summary>
+        /// <returns></returns>
         public static async Task<bool> Connect()
         {
             try
@@ -99,6 +104,13 @@ namespace FutureFlex.Function
 
             }
         }
+
+
+        /// <summary>
+        /// send data to server
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public static async Task<bool> SendDataAsync(string message)
         {
             try
@@ -144,6 +156,11 @@ namespace FutureFlex.Function
             return true;
         }
 
+
+        /// <summary>
+        /// Disconnect from server and dispose resources
+        /// </summary>
+        /// <returns></returns>
         public static async Task<bool> Disconnect()
         {
             try

@@ -68,7 +68,13 @@ namespace FutureFlex.SQL
             return tb;
         }
 
-        public static bool LOGIN(string username, string password)   /////// ใช้ในการ LOGIN frmLogin
+        /// <summary>
+        /// login เข้าสู่ระบบ
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static bool LOGIN(string username, string password) 
         {
             try
             {
@@ -113,7 +119,7 @@ namespace FutureFlex.SQL
 
         #region "INSERTDATA"
         /// <summary>
-        /// 
+        /// สร้างพนักงานใหม่
         /// </summary>
         /// <param name="emp_name"></param>
         /// <param name="emp_username"></param>
@@ -159,7 +165,7 @@ namespace FutureFlex.SQL
 
         #region "UPDATEDATA"
         /// <summary>
-        /// 
+        /// อัพเดทข้อมูลใหม่
         /// </summary>
         /// <param name="emp_name"></param>
         /// <param name="emp_username"></param>
@@ -199,7 +205,11 @@ namespace FutureFlex.SQL
         #endregion
 
         #region "DELETEDATA"
-
+        /// <summary>
+        /// ลบพนักงานใหม่
+        /// </summary>
+        /// <param name="emp_username"></param>
+        /// <returns></returns>
         public static bool DELETE(string emp_username)
         {
             try
