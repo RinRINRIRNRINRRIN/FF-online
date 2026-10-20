@@ -110,7 +110,11 @@ namespace FutureFlex.API
             Log.Information("== เครีย์ property MRP สำเร็จ");
         }
 
-
+        /// <summary>
+        /// ตามหาเลขที่ PO
+        /// </summary>
+        /// <param name="po">PO ที่ต้องการค้นหา</param>
+        /// <returns></returns>
         public async static Task<bool> GET_PO(string po)
         {
             Log.Information($"======================================================  GET PO {po}");
@@ -178,6 +182,12 @@ namespace FutureFlex.API
             return true;
         }
 
+        /// <summary>
+        /// ตามหาเลขที่ GV
+        /// </summary>
+        /// <param name="gv">GV ที่ต้องการค้นหา</param>
+        /// <param name="po_num">PO ที่ต้องการค้นหา</param>
+        /// <returns></returns>
         public async static Task<bool> GET_MRP(string gv, string po_num)
         {
             Log.Information($"== ดึงข้อมูลจาก odoo ค้นหาจาก {gv}");
@@ -273,7 +283,7 @@ namespace FutureFlex.API
 
 
         /// <summary>
-        /// 
+        /// สร้างรายการชั่งน้ำหนักลงใน Odoo
         /// </summary>
         /// <param name="gv_id">เลขที่ GV ไม่ใช่ชื่อ GV</param>
         /// <param name="wgh_id">เลขที่การชั่ง id auto increaement</param>
